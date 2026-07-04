@@ -1,4 +1,4 @@
-const CACHE = 'warroom-v3';
+const CACHE = 'warroom-v4';
 const SHELL = [
   './', './app.css', './app.js', './demo-data.js', './vendor/three.module.min.js',
   './fonts/blackops.woff2', './fonts/rajdhani-500.woff2', './fonts/rajdhani-600.woff2', './fonts/rajdhani-700.woff2',

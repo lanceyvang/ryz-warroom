@@ -22,8 +22,9 @@ const api = async (path, opts = {}) => {
   const token = localStorage.getItem('token');
   if (token) headers.Authorization = `Bearer ${token}`;
   const r = await fetch('api' + path, { ...opts, headers }).catch(() => null);
-  // No backend at all (network error) or a static host serving an HTML 404 → demo mode.
-  if (!r || (!r.ok && (r.headers.get('content-type') || '').includes('text/html'))) {
+  // No backend: network error, or an error without a JSON body (static hosts return
+  // HTML 404s / bare 405s; real backends always answer errors in JSON) → demo mode.
+  if (!r || (!r.ok && !(r.headers.get('content-type') || '').includes('json'))) {
     staticMode = true;
     return demoApi(path);
   }
