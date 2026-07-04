@@ -1,8 +1,8 @@
-const CACHE = 'warroom-v2';
+const CACHE = 'warroom-v3';
 const SHELL = [
-  '/', '/app.css', '/app.js', '/vendor/three.module.min.js',
-  '/fonts/blackops.woff2', '/fonts/rajdhani-500.woff2', '/fonts/rajdhani-600.woff2', '/fonts/rajdhani-700.woff2',
-  '/art/emblem.png', '/art/hero-bg.jpg', '/manifest.webmanifest',
+  './', './app.css', './app.js', './demo-data.js', './vendor/three.module.min.js',
+  './fonts/blackops.woff2', './fonts/rajdhani-500.woff2', './fonts/rajdhani-600.woff2', './fonts/rajdhani-700.woff2',
+  './art/emblem.png', './art/hero-bg.jpg', './manifest.webmanifest',
 ];
 
 self.addEventListener('install', (e) => {
@@ -18,7 +18,7 @@ self.addEventListener('activate', (e) => {
 
 self.addEventListener('fetch', (e) => {
   const url = new URL(e.request.url);
-  if (url.pathname.startsWith('/api')) {
+  if (url.pathname.includes('/api/')) {
     // network-first for live data, cached fallback for offline review
     e.respondWith(
       fetch(e.request).then((r) => {

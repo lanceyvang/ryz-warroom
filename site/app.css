@@ -1,12 +1,12 @@
 /* ============ RYZ WAR ROOM — command console theme ============ */
 @font-face {
   font-family: 'Black Ops One';
-  src: url('/fonts/blackops.woff2') format('woff2');
+  src: url('fonts/blackops.woff2') format('woff2');
   font-display: swap;
 }
-@font-face { font-family: 'Rajdhani'; font-weight: 500; src: url('/fonts/rajdhani-500.woff2') format('woff2'); font-display: swap; }
-@font-face { font-family: 'Rajdhani'; font-weight: 600; src: url('/fonts/rajdhani-600.woff2') format('woff2'); font-display: swap; }
-@font-face { font-family: 'Rajdhani'; font-weight: 700; src: url('/fonts/rajdhani-700.woff2') format('woff2'); font-display: swap; }
+@font-face { font-family: 'Rajdhani'; font-weight: 500; src: url('fonts/rajdhani-500.woff2') format('woff2'); font-display: swap; }
+@font-face { font-family: 'Rajdhani'; font-weight: 600; src: url('fonts/rajdhani-600.woff2') format('woff2'); font-display: swap; }
+@font-face { font-family: 'Rajdhani'; font-weight: 700; src: url('fonts/rajdhani-700.woff2') format('woff2'); font-display: swap; }
 
 :root {
   --bg0: #06090a;
@@ -97,7 +97,7 @@ body::after {
   position: relative;
   height: 52dvh; min-height: 380px;
   display: flex; align-items: flex-end; justify-content: center;
-  background: url('/art/hero-bg.jpg') center 30% / cover no-repeat;
+  background: url('art/hero-bg.jpg') center 30% / cover no-repeat;
 }
 .hero::before {
   content: '';
@@ -289,7 +289,7 @@ body::after {
   gap: 18px; padding: 24px;
   background:
     linear-gradient(180deg, rgba(6,9,10,0.82), rgba(6,9,10,0.92)),
-    url('/art/hero-bg.jpg') center / cover no-repeat, var(--bg0);
+    url('art/hero-bg.jpg') center / cover no-repeat, var(--bg0);
 }
 .gate img { width: 108px; height: 108px; filter: drop-shadow(0 0 24px rgba(62,240,200,0.4)); }
 .gate h1 { font-family: var(--display); font-size: 30px; letter-spacing: 3px; text-align: center; }

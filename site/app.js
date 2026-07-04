@@ -1,11 +1,32 @@
-import * as THREE from '/vendor/three.module.min.js';
+import * as THREE from './vendor/three.module.min.js';
+import * as DEMO from './demo-data.js';
 
 /* ================= API ================= */
+// Static mode: when no /api backend exists (e.g. GitHub Pages), answer from demo-data.js.
+let staticMode = false;
+const demoApi = (path) => {
+  if (path === '/auth/me') return DEMO.USER;
+  if (path === '/auth/login') return { token: 'demo', user: DEMO.USER };
+  if (path === '/alliance') return DEMO.ALLIANCE;
+  if (path === '/alliance/growth') return DEMO.GROWTH;
+  if (path === '/squads') return DEMO.SQUADS;
+  if (path === '/draw/spin') {
+    const pool = DEMO.MEMBERS.filter((m) => m.total_power > 0);
+    return { winner: pool[Math.floor(Math.random() * pool.length)] };
+  }
+  throw new Error('Not available in demo');
+};
 const api = async (path, opts = {}) => {
+  if (staticMode) return demoApi(path);
   const headers = { 'Content-Type': 'application/json' };
   const token = localStorage.getItem('token');
   if (token) headers.Authorization = `Bearer ${token}`;
-  const r = await fetch('/api' + path, { ...opts, headers });
+  const r = await fetch('api' + path, { ...opts, headers }).catch(() => null);
+  // No backend at all (network error) or a static host serving an HTML 404 → demo mode.
+  if (!r || (!r.ok && (r.headers.get('content-type') || '').includes('text/html'))) {
+    staticMode = true;
+    return demoApi(path);
+  }
   if (!r.ok) throw new Error((await r.json().catch(() => ({}))).error || `HTTP ${r.status}`);
   return r.json();
 };
@@ -293,4 +314,4 @@ async function boot() {
 }
 
 boot();
-if ('serviceWorker' in navigator) navigator.serviceWorker.register('/sw.js');
+if ('serviceWorker' in navigator) navigator.serviceWorker.register('sw.js');
