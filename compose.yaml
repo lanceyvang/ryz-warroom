@@ -1,0 +1,10 @@
+services:
+  warroom:
+    build: .
+    ports:
+      - "5129:5129"
+    # Uncomment to point at your real backend for live alliance data.
+    # Leave commented to run with the built-in demo fixtures.
+    # environment:
+    #   API_ORIGIN: "http://your-backend:3000"
+    restart: unless-stopped
